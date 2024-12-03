@@ -9,7 +9,7 @@ const allProducts = async (req, res) => {
   try {
     const db = await mysql.createConnection(dbSettings);
     let sqlQuery = `
-    SELECT products.id, products.name, products.price, products.stock, products.color
+    SELECT products.id, products.name, products.price, products.stock, products.color, products.image1, products.description
     FROM products
     LEFT JOIN categories ON products.name = categories.category
     WHERE categories.id = ?
@@ -27,6 +27,8 @@ const allProducts = async (req, res) => {
       price: convertPrice(currency, row.price),
       stock: row.stock,
       color: row.color,
+      image: row.image1,
+      description: row.description,
     }));
     res.json({
       message: "Successfully retrieved products.",
