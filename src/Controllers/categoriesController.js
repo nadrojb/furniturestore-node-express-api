@@ -5,7 +5,7 @@ const categories = async (req, res) => {
   try {
     const db = await mysql.createConnection(dbSettings);
     const output =
-      await db.query(`SELECT categories.id, categories.category AS name, COUNT(products.name) AS products
+      await db.query(`SELECT categories.id, categories.category AS name, COUNT(products.name) AS products, categories.image
   FROM categories 
   LEFT JOIN products 
   ON categories.category = products.name 
@@ -16,6 +16,7 @@ const categories = async (req, res) => {
       id: row.id,
       name: row.name,
       products: row.products,
+      image: row.image,
     }));
     res.json({
       message: "Successfully retrieved categories.",
