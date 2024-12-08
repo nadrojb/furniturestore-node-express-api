@@ -4,7 +4,7 @@ const convertPrice = require("./Services/currencyConversion").convertPrice;
 
 const allProducts = async (req, res) => {
   let cat = req.query.cat;
-  let currency = req.query.currency;
+  let currency = req.query.currency || "GBP";
   let instockonly = parseInt(req.query.instockonly || 0);
   try {
     const db = await mysql.createConnection(dbSettings);
@@ -14,7 +14,7 @@ const allProducts = async (req, res) => {
     LEFT JOIN categories ON products.name = categories.category
     WHERE categories.id = ?
   `;
-    let queryParams = [cat];
+    let queryParams = [cat, currency];
 
     if (instockonly === 1) {
       sqlQuery += ` AND products.stock > 1;`;
@@ -22,14 +22,16 @@ const allProducts = async (req, res) => {
 
     const rows = await db.query(sqlQuery, queryParams);
 
-    const products = rows.map((row) => ({
-      id: row.id,
-      price: convertPrice(currency, row.price),
-      stock: row.stock,
-      color: row.color,
-      image: row.image1,
-      description: row.description,
-    }));
+    const products = rows.map((row) => {
+      return {
+        id: row.id,
+        stock: row.stock,
+        color: row.color,
+        image: row.image1,
+        description: row.description,
+        price: convertPrice(currency, row.price),
+      };
+    });
     res.json({
       message: "Successfully retrieved products.",
       data: products,

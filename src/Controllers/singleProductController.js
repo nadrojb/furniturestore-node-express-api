@@ -6,7 +6,7 @@ const convertUnit = require("./Services/unitConversion").convertUnit;
 const singleProduct = async (req, res) => {
   let productId = req.query.id;
   let unit = req.query.unit;
-  let currency = req.query.currency;
+  let currency = req.query.currency || "GBP";
 
   try {
     const db = await mysql.createConnection(dbSettings);

@@ -1,15 +1,19 @@
 function convertPrice(currency, input) {
   if (currency == "GBP") {
-    return input.toFixed(2);
+    let result = parseFloat(input);
+    return result;
   } else if (currency == "EUR") {
     let result = input * 1.2;
-    return result.toFixed(2);
+    let convertedResult = result.toFixed(2);
+    return parseFloat(convertedResult);
   } else if (currency == "USD") {
     let result = input * 1.27;
-    return result.toFixed(2);
+    let convertedResult = result.toFixed(2);
+    return parseFloat(convertedResult);
   } else if (currency == "YEN") {
     let result = input * 190.79;
-    return result.toFixed(2);
+    let convertedResult = result.toFixed(2);
+    return parseFloat(convertedResult);
   }
 }
 
