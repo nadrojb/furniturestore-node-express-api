@@ -5,7 +5,7 @@ const convertUnit = require("./Services/unitConversion").convertUnit;
 
 const singleProduct = async (req, res) => {
   let productId = req.query.id;
-  let unit = req.query.unit;
+  let unit = req.query.unit || "mm";
   let currency = req.query.currency || "GBP";
 
   try {
