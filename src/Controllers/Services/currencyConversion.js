@@ -12,7 +12,7 @@ function convertPrice(currency, input) {
     return parseFloat(convertedResult);
   } else if (currency == "YEN") {
     let result = input * 190.79;
-    let convertedResult = result.toFixed(2);
+    let convertedResult = result.toFixed(0);
     return parseFloat(convertedResult);
   }
 }
