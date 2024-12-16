@@ -27,7 +27,6 @@ const allProducts = async (req, res) => {
         stock: row.stock,
         color: row.color,
         image: row.image1,
-        description: row.description,
         price: convertPrice(currency, row.price),
       };
     });
