@@ -15,6 +15,7 @@ const categories = async (req, res) => {
     const categories = output.map((row) => ({
       id: row.id,
       name: row.name,
+      products: row.products,
       image: row.image,
     }));
     res.json({
