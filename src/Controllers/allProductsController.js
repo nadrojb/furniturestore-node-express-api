@@ -9,7 +9,7 @@ const allProducts = async (req, res) => {
   try {
     const db = await mysql.createConnection(dbSettings);
     let sqlQuery = `
-    SELECT products.id, products.name, products.price, products.stock, products.color, products.image1, FROM products
+    SELECT products.id, products.name, products.price, products.stock, products.color, products.image1 FROM products
     LEFT JOIN categories ON products.name = categories.category
     WHERE categories.id = ?
   `;
